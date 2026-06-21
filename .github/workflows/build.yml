@@ -19,20 +19,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
+
       - name: Download Godot AAR library
         run: |
           mkdir -p plugin/libs
           wget -q "https://github.com/godotengine/godot/releases/download/4.6-stable/godot-lib.4.6.stable.template_release.aar" \
             -O plugin/libs/godot-lib.4.6.stable.template_release.aar
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Build AAR
-        run: ./gradlew :plugin:assembleRelease
+        run: gradle :plugin:assembleRelease
 
       - name: Upload AAR
         uses: actions/upload-artifact@v4
