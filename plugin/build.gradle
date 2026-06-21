@@ -23,7 +23,13 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.unity3d.ads:unity-ads:4.9.2'
+    }
+}
+
 dependencies {
-    implementation 'com.unity3d.ads:unity-ads:4.9.2'
+    api 'com.unity3d.ads:unity-ads:4.9.2'
     compileOnly fileTree(dir: 'libs', include: ['godot-lib*.aar'])
 }
