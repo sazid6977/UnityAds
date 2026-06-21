@@ -1,0 +1,2 @@
+rootProject.name = "UnityAdsPlugin"
+include ':plugin'
