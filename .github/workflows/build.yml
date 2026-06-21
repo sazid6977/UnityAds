@@ -33,17 +33,16 @@ jobs:
       - name: Build AAR
         run: gradle :plugin:assembleRelease
 
-      - name: Download Unity Ads SDK and merge
+      - name: Download Unity Ads from Maven and merge
         run: |
-          wget -q "https://github.com/Unity-Technologies/unity-ads-android/releases/download/4.9.2/unity-ads.aar" \
+          wget -q "https://repo1.maven.org/maven2/com/unity3d/ads/unity-ads/4.9.2/unity-ads-4.9.2.aar" \
             -O unity-ads.aar
-          mkdir -p merged/classes merged/unity merged/godot
+          mkdir -p merged
+          unzip -q plugin/build/outputs/aar/plugin-release.aar -d merged/
+          unzip -q unity-ads.aar -d unity_extracted/
+          cp -rn unity_extracted/. merged/
           cd merged
-          unzip -q ../plugin/build/outputs/aar/plugin-release.aar -d godot/
-          unzip -q ../unity-ads.aar -d unity/
-          cp -r unity/. godot/
-          cd godot
-          zip -r ../../UnityAdsPlugin.aar .
+          zip -r ../UnityAdsPlugin.aar .
 
       - name: Upload AAR
         uses: actions/upload-artifact@v4
