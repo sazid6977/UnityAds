@@ -13,6 +13,7 @@ import org.godotengine.godot.plugin.GodotPlugin;
 import org.godotengine.godot.plugin.UsedByGodot;
 import java.util.Set;
 import java.util.HashSet;
+import org.godotengine.godot.plugin.SignalInfo;
 
 public class UnityAdsPlugin extends GodotPlugin {
 
@@ -123,24 +124,24 @@ public class UnityAdsPlugin extends GodotPlugin {
         });
     }
 
-    @NonNull
+@NonNull
     @Override
-    public Set<String> getPluginSignals() {
-        Set<String> signals = new HashSet<>();
-        signals.add("on_initialization_complete");
-        signals.add("on_initialization_failed");
-        signals.add("on_rewarded_loaded");
-        signals.add("on_rewarded_failed");
-        signals.add("on_rewarded_show_start");
-        signals.add("on_rewarded_show_click");
-        signals.add("on_rewarded_show_complete");
-        signals.add("on_rewarded_show_failed");
-        signals.add("on_interstitial_loaded");
-        signals.add("on_interstitial_failed");
-        signals.add("on_interstitial_show_start");
-        signals.add("on_interstitial_show_click");
-        signals.add("on_interstitial_show_complete");
-        signals.add("on_interstitial_show_failed");
+    public Set<SignalInfo> getPluginSignals() {
+        Set<SignalInfo> signals = new HashSet<>();
+        signals.add(new SignalInfo("on_initialization_complete"));
+        signals.add(new SignalInfo("on_initialization_failed", String.class));
+        signals.add(new SignalInfo("on_rewarded_loaded", String.class));
+        signals.add(new SignalInfo("on_rewarded_failed", String.class, String.class));
+        signals.add(new SignalInfo("on_rewarded_show_start", String.class));
+        signals.add(new SignalInfo("on_rewarded_show_click", String.class));
+        signals.add(new SignalInfo("on_rewarded_show_complete", String.class, Boolean.class));
+        signals.add(new SignalInfo("on_rewarded_show_failed", String.class, String.class));
+        signals.add(new SignalInfo("on_interstitial_loaded", String.class));
+        signals.add(new SignalInfo("on_interstitial_failed", String.class, String.class));
+        signals.add(new SignalInfo("on_interstitial_show_start", String.class));
+        signals.add(new SignalInfo("on_interstitial_show_click", String.class));
+        signals.add(new SignalInfo("on_interstitial_show_complete", String.class));
+        signals.add(new SignalInfo("on_interstitial_show_failed", String.class, String.class));
         return signals;
     }
 }
