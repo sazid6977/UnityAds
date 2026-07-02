@@ -44,8 +44,24 @@ jobs:
           cd merged
           zip -r ../UnityAdsPlugin.aar .
 
-      - name: Upload AAR
+      - name: Create GDAP file
+        run: |
+          cat > UnityAdsPlugin.gdap << 'EOF'
+          [config]
+          name="UnityAdsPlugin"
+          binary_type="local"
+          binary="UnityAdsPlugin.aar"
+
+          [dependencies]
+          local=[]
+          remote=[]
+          custom_maven_repos=[]
+          EOF
+
+      - name: Upload Plugin Files
         uses: actions/upload-artifact@v4
         with:
           name: UnityAdsPlugin
-          path: UnityAdsPlugin.aar
+          path: |
+            UnityAdsPlugin.aar
+            UnityAdsPlugin.gdap
