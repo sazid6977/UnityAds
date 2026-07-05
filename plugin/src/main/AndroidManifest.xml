@@ -4,4 +4,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v2.UnityAdsPlugin"
+            android:value="com.example.unityadsplugin.UnityAdsPlugin" />
+    </application>
+
 </manifest>
