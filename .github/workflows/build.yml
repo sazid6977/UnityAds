@@ -33,7 +33,7 @@ jobs:
       - name: Build AAR
         run: gradle :plugin:assembleRelease
 
-      - name: Download Unity Ads from Maven and merge
+      - name: Merge Unity Ads SDK
         run: |
           wget -q "https://repo1.maven.org/maven2/com/unity3d/ads/unity-ads/4.9.2/unity-ads-4.9.2.aar" \
             -O unity-ads.aar
@@ -41,27 +41,10 @@ jobs:
           unzip -q plugin/build/outputs/aar/plugin-release.aar -d merged/
           unzip -q unity-ads.aar -d unity_extracted/
           cp -rn unity_extracted/. merged/
-          cd merged
-          zip -r ../UnityAdsPlugin.aar .
+          cd merged && zip -r ../UnityAdsPlugin.aar .
 
-      - name: Create GDAP file
-        run: |
-          cat > UnityAdsPlugin.gdap << 'EOF'
-          [config]
-          name="UnityAdsPlugin"
-          binary_type="local"
-          binary="UnityAdsPlugin.aar"
-
-          [dependencies]
-          local=[]
-          remote=[]
-          custom_maven_repos=[]
-          EOF
-
-      - name: Upload Plugin Files
+      - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
           name: UnityAdsPlugin
-          path: |
-            UnityAdsPlugin.aar
-            UnityAdsPlugin.gdap
+          path: UnityAdsPlugin.aar
