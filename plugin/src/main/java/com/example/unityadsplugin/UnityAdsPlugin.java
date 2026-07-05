@@ -53,7 +53,6 @@ public class UnityAdsPlugin extends GodotPlugin {
         });
     }
 
-    // ─── Rewarded ───────────────────────────────────────────
     @UsedByGodot
     public void loadRewarded(String placementId) {
         UnityAds.load(placementId, new IUnityAdsLoadListener() {
@@ -93,7 +92,6 @@ public class UnityAdsPlugin extends GodotPlugin {
         });
     }
 
-    // ─── Interstitial ────────────────────────────────────────
     @UsedByGodot
     public void loadInterstitial(String placementId) {
         UnityAds.load(placementId, new IUnityAdsLoadListener() {
@@ -132,7 +130,6 @@ public class UnityAdsPlugin extends GodotPlugin {
         });
     }
 
-    // ─── Banner ──────────────────────────────────────────────
     @UsedByGodot
     public void showBanner(String placementId, boolean showOnTop) {
         activity.runOnUiThread(() -> {
@@ -155,7 +152,6 @@ public class UnityAdsPlugin extends GodotPlugin {
                 @Override
                 public void onBannerLeftApplication(BannerView bannerAdView) {}
             });
-
             FrameLayout layout = activity.getWindow().getDecorView().findViewById(android.R.id.content);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -180,7 +176,6 @@ public class UnityAdsPlugin extends GodotPlugin {
         });
     }
 
-    // ─── Signals ─────────────────────────────────────────────
     @NonNull
     @Override
     public Set<SignalInfo> getPluginSignals() {
